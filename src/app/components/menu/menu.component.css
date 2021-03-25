@@ -1,0 +1,35 @@
+
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #1976d2;
+  color: white;
+  font-weight: 600;
+}
+
+.toolbar .menu {
+  max-width: 1440px;
+  width: calc(100% - 64px);
+  margin: 0 32px;
+  display: flex;
+}
+
+.menu-item {
+  color: white;
+  font-size: 20px;
+  margin: 10px;
+}
+
+.menu-item a {
+  color: white;
+  text-decoration: none;
+}
+
+.menu-item a:hover {
+  text-decoration: underline;
+}

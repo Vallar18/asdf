@@ -1,0 +1,59 @@
+<div class="container">
+
+  <app-menu></app-menu>
+
+  <div class="content" role="main">
+    <div class="tests-list">
+        <h2>
+        Розв'язування диференціальних рівнянь першого порядку
+        </h2>
+      <ng-container *ngIf="endTest; else test">
+        <div class="card highlight-card card-small">
+          <p>
+            Ви пройшли тест
+          </p>
+          <p>
+            Вірних відповідей:  {{this.countRight}}
+          </p>
+        </div>
+        <button (click)="repeatTest()">
+          Пройти тест ще раз
+        </button>
+      </ng-container>
+      <ng-template #test>
+        <ng-container *ngIf="showTest; else showButton">
+          <h3>{{selectedTest.title}}</h3>
+          <div class="test-item">
+            <ng-container *ngFor="let el of selectedTest.items">
+              <div class="test-element"
+                   [ngClass]="{'success': el.success && checked , 'error': el.error && checked}">
+                <label (click)="select(el)">
+                  <input type="radio" [value]="el.id" [name]="el.id"/>
+                  <img [src]="el.image" alt="">
+                </label>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!checked; else next">
+              <ng-container *ngIf="showError">
+                <h2 class="error">Ви повинні вибрати одне з значень</h2>
+              </ng-container>
+              <button (click)="checkSelected()">
+                Перевірити
+              </button>
+            </ng-container>
+            <ng-template #next>
+              <button (click)="nextEv()">
+                Далі
+              </button>
+            </ng-template>
+          </div>
+        </ng-container>
+        <ng-template #showButton>
+          <button (click)="showTest = true">
+            Почати
+          </button>
+        </ng-template>
+      </ng-template>
+    </div>
+  </div>
+</div>
