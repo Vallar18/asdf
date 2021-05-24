@@ -4,9 +4,9 @@
 
   <div class="content" role="main">
     <div class="tests-list">
-        <h2>
+      <h2>
         Розв'язування диференціальних рівнянь першого порядку
-        </h2>
+      </h2>
       <ng-container *ngIf="endTest; else test">
         <div class="card highlight-card card-small">
           <p>
@@ -23,13 +23,21 @@
       <ng-template #test>
         <ng-container *ngIf="showTest; else showButton">
           <h3>{{selectedTest.title}}</h3>
+          <ng-container *ngIf="selectedTest.image && selectedTest.image.length">
+            <img [src]="selectedTest.image" alt="">
+          </ng-container>
           <div class="test-item">
             <ng-container *ngFor="let el of selectedTest.items">
               <div class="test-element"
                    [ngClass]="{'success': el.success && checked , 'error': el.error && checked}">
                 <label (click)="select(el)">
-                  <input type="radio" [value]="el.id" [name]="el.id"/>
-                  <img [src]="el.image" alt="">
+                  <input [disabled]="checked" [type]="selectedTest.type || 'radio'" [value]="el.id" [name]="el.id"/>
+                  <ng-container *ngIf="el.image; else text">
+                    <img [src]="el.image" [alt]="el.alt">
+                  </ng-container>
+                  <ng-template #text>
+                    {{el.alt}}
+                  </ng-template>
                 </label>
               </div>
             </ng-container>
